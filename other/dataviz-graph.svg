@@ -1,0 +1,6 @@
+<svg style="width:{{width}}px; height:{{height}}px;">
+
+  <line ng-repeat="line in data" x1="{{$index / data.length * width}}" y1="{{data[$index - 1].value / max * height}}" x2="{{($index + 1) / data.length * width}}" y2="{{line.value / max * height}}">
+  </line>
+
+</svg>

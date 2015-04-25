@@ -1,0 +1,46 @@
+
+<div class="chart" style="width:{{width}}px; height:{{height}}px;">
+
+	<div class="y">
+	{{yAxis}}
+	</div>
+	<div class="x">
+	{{xAxis}}
+	</div>
+
+
+	<div class="bar" ng-repeat="bar in graphData"
+	style="
+	height:{{ bar.value / max * height }}px;
+	width: {{ width / graphData.length - 5 }}px;
+	left: {{ $index / graphData.length * width }}px;
+	">
+		<p class="label">{{bar.label}}</p>
+	</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
