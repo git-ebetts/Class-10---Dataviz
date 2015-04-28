@@ -23,6 +23,9 @@
 
   <nav class="nav" ng-include="'partials/navigation.html'"></nav>
 
+  <div ng-show="currentUser">
+    <span>Hi {{ currentUser.firstname }}</span>
+</div>
   <main class="wrap" ng-view></main>
 
 </body> 
