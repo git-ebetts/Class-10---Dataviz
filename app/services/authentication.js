@@ -2,6 +2,7 @@ graphApp.factory('Authentication',
 	function($firebase, 
 		$firebaseAuth, 
 		$rootScope,
+		$firebaseObject,
 		$routeParams, 
 		$location, 
 		FIREBASE_URL) {
@@ -13,6 +14,8 @@ graphApp.factory('Authentication',
 auth.$onAuth(function(authData) {
   if (authData) {
     console.log("Logged in as:", authData.uid);
+    var user = $firebaseObject(ref.child('users').child(authData.uid));
+    $rootScope.currentUser = user;
   } else {
     console.log("Logged out");
   }
@@ -36,6 +39,11 @@ auth.$onAuth(function(authData) {
 					password: user.password
 				}); // authwithpassword
 			}, // login
+
+			logout: function(user) {
+				return auth.$unauth();
+			},
+			
 			register: function(user) {
 				return auth.$createUser({
 				email: user.email,
