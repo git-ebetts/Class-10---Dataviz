@@ -9,16 +9,24 @@ graphApp.factory('Authentication',
 		var ref = new Firebase(FIREBASE_URL);
 		var auth = $firebaseAuth(ref);
 
-		auth.$onAuth(function(authUser) {
-			if (authUser) {
-				var ref = new Firebase(FIREBASE_URL + '/users/' + authUser.uid);
-				var user = $firebase(ref).$asObject();
-				$rootScope.currentUser = user;
-			} else {
-				$rootScope.currentUser = '';
-			}
 
-			});
+auth.$onAuth(function(authData) {
+  if (authData) {
+    console.log("Logged in as:", authData.uid);
+  } else {
+    console.log("Logged out");
+  }
+});
+		//auth.$onAuth(function(authData) {
+			//if (authData) {
+			//	var ref = new Firebase(FIREBASE_URL + '/users/' + authData.uid);
+			//	var user = $firebase(ref).$asObject();
+			//	$rootScope.currentUser = user;
+			//} else {
+			//	$rootScope.currentUser = '';
+		//	}
+
+			//});
 	
 
 		var myObject = {
@@ -53,7 +61,6 @@ graphApp.factory('Authentication',
 
 		return myObject;
 	}); //factory
-
 
 
 

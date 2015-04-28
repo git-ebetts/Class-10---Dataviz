@@ -23,8 +23,8 @@
 
   <nav class="nav" ng-include="'partials/navigation.html'"></nav>
 
-  <div ng-show="currentUser">
-    <span>Hi {{ currentUser.firstname }}</span>
+  <div ng-show="authData">
+    <span>Hi {{ authData.firstname }}</span>
 </div>
   <main class="wrap" ng-view></main>
 
