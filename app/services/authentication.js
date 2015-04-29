@@ -11,26 +11,16 @@ graphApp.factory('Authentication',
 		var auth = $firebaseAuth(ref);
 
 
-auth.$onAuth(function(authData) {
-  if (authData) {
-    console.log("Logged in as:", authData.uid);
-    var user = $firebaseObject(ref.child('users').child(authData.uid));
-    $rootScope.currentUser = user;
-  } else {
-    console.log("Logged out");
-  }
-});
-		//auth.$onAuth(function(authData) {
-			//if (authData) {
-			//	var ref = new Firebase(FIREBASE_URL + '/users/' + authData.uid);
-			//	var user = $firebase(ref).$asObject();
-			//	$rootScope.currentUser = user;
-			//} else {
-			//	$rootScope.currentUser = '';
-		//	}
-
-			//});
-	
+		auth.$onAuth(function(authData) {
+			if (authData) {
+				console.log("Logged in as:", authData.uid);
+				var user = $firebaseObject(ref.child('users').child(authData.uid));
+				$rootScope.currentUser = user;
+			} else {
+				console.log("Logged out");
+				$rootScope.currentUser = null;
+			}
+		});
 
 		var myObject = {
 			login: function(user) {
@@ -46,8 +36,8 @@ auth.$onAuth(function(authData) {
 			
 			register: function(user) {
 				return auth.$createUser({
-				email: user.email,
-				password: user.password	
+					email: user.email,
+					password: user.password	
 				}).then(function(authData){
 					var ref = new Firebase(FIREBASE_URL);
 					var postRef = ref.child('users').child(authData.uid);
